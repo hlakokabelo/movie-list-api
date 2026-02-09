@@ -10,13 +10,13 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-//create a tables
 model User {
-  id String @id @default(uuid())
-  name String
-  email String @unique
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
   password String
 
   createdAt DateTime @default(now())
@@ -30,29 +30,29 @@ model Movie {
   id          String   @id @default(uuid())
   title       String
   overview    String?
-  releaseYear Int      
+  releaseYear Int
   genres      String[] @default([])
   runtime     Int?
-  posterUrl   String?  
-  createdBy   String   
-  createdAt   DateTime @default(now()) 
+  posterUrl   String?
+  createdBy   String
+  createdAt   DateTime @default(now())
 
-  creator User  @relation("MovieCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+  creator        User            @relation("MovieCreator", fields: [createdBy], references: [id], onDelete: Cascade)
   watchlistItems WatchlistItem[]
 }
 
 model WatchlistItem {
-  id        String   @id @default(uuid())
-  userId    String   
-  movieId   String   
+  id        String          @id @default(uuid())
+  userId    String
+  movieId   String
   status    WatchlistStatus @default(PLANNED)
   rating    Int?
   notes     String?
-  createdAt DateTime @default(now()) 
-  updatedAt DateTime @default(now()) 
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @default(now())
 
   // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
 
   @@unique([userId, movieId])

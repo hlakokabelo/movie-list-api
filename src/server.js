@@ -10,9 +10,20 @@ const PORT = 5001;
 
 //Import Routes
 import movieRoutes from "./routes/movieRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import watchListRoutes from './routes/watchListRoutes.js'
+
+//body parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //API Routes
 app.use("/movies", movieRoutes);
+app.use("/auth", authRoutes);
+app.use("/watchlist", watchListRoutes);
+
+
+
 
 app.get("/hello", (req, res) => {
   res.json({ message: "hello world" });
