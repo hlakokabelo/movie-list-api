@@ -12,6 +12,7 @@ const PORT = 5001;
 import movieRoutes from "./routes/movieRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import watchListRoutes from './routes/watchListRoutes.js'
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 //body parsing middleware
 app.use(express.json());
@@ -32,6 +33,13 @@ app.get("/hello", (req, res) => {
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+//error handler
+//not found middleware runs before handler
+app.use(notFound)
+app.use(errorHandler)
+
 
 // Handle unhandled promise rejections (e.g., database connection errors)
 process.on("unhandledRejection", (err) => {
