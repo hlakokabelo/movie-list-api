@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { prisma } from "../config/db";
+import { prisma } from "../config/db.js";
 
 export const authMiddleware = async (req, res, next) => {
   let token;
@@ -18,7 +18,7 @@ export const authMiddleware = async (req, res, next) => {
   }
 
   if (!token) {
-    return res.status(400).json({ error: "not authorized, no jwt prrovied" });
+    return res.status(401).json({ error: "not authorized, no jwt provided" });
   }
 
   try {
@@ -35,6 +35,6 @@ export const authMiddleware = async (req, res, next) => {
     req.user = user;
     next();
   } catch (err) {
-    return res.status(400).json({ error: "not authorized, no jwt prrovied" });
+    return res.status(401).json({ error: "not authorized,  jwt failed" });
   }
 };
