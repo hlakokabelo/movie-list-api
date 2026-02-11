@@ -1,9 +1,47 @@
 import { prisma } from "../config/db.js";
 
-const getMovies = async (req, res) => {
-  const movies = await prisma.movie.findMany();
 
-  res.json({ status: "success", data: { movies } });
+
+/**
+ * Returns all movies
+ * Can be queried by title,year & genre
+ */
+const getMovies = async (req, res) => {
+  let movies = await prisma.movie.findMany();
+
+  const { title, year, genre } = req.query;
+
+  if (title !== undefined) {
+    movies = movies.filter((movie) => {
+      if (movie.title.toLowerCase().includes(title.toLowerCase())) return movie;
+    });
+  }
+
+  if (year !== undefined) {
+    if (isNaN(year))
+      return res
+        .status(401)
+        .json({
+          error: `release year must be a number, ${year}, is not a number`,
+        });
+    movies = movies.filter((movie) => {
+      if (movie.releaseYear === parseInt(year)) return movie;
+    });
+  }
+
+  if (genre !== undefined) {
+    movies = movies.filter((movie) => {
+      for (const mGenre of movie.genres) {
+        console.log(mGenre);
+        if (mGenre.toLowerCase().includes(genre.toLowerCase())) return movie;
+      }
+    });
+  }
+
+  res.json({
+    status: "success",
+    data: { moviesCount: movies.length, movies },
+  });
 };
 
 const getMovie = async (req, res) => {
@@ -13,7 +51,7 @@ const getMovie = async (req, res) => {
   //movie not found
   if (!movie) {
     return res
-      .succes(400)
+      .status(400)
       .json({ error: `movie with id ${movieId} was not found` });
   }
   res.json({ status: "success", data: { movie } });
@@ -46,7 +84,7 @@ const upDateMovie = async (req, res) => {
   const movie = await prisma.movie.findUnique({ where: { id: movieId } });
 
   if (!movie) {
-    return res.status(400).json({ error: "movie not found" });
+    return res.status(400).json({ error: "movie was not found" });
   }
 
   //owner is updating
@@ -82,13 +120,13 @@ const deleteMovie = async (req, res) => {
   if (!movie) {
     return res
       .status(401)
-      .json({ error: `movie with id ${movieId} not found` });
+      .json({ error: `movie with id ${movieId} was not found` });
   }
 
-  //owner is deleting
+  //check if owner is deleting
   if (movie.createdBy !== req.user.id) {
     return res.status(401).json({
-      error: `movie with id ${movieId} not foundyou dont have permission to delete movie`,
+      error: `you dont have permission to delete movie with id ${movieId} `,
     });
   }
 

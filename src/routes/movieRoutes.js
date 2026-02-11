@@ -1,18 +1,21 @@
 import express from "express";
-import { getMovie, getMovies,addMovie, upDateMovie ,deleteMovie} from "../controllers/moviesController.js";
+import {
+  getMovie,
+  getMovies,
+  addMovie,
+  upDateMovie,
+  deleteMovie,
+} from "../controllers/moviesController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.use(authMiddleware)
-
 router.get("/", getMovies);
 router.get("/:id", getMovie);
 
-router.post("/", addMovie);
-
-router.put("/:id", upDateMovie);
-
-router.delete("/:id",deleteMovie);
+//protected routes
+router.post("/", authMiddleware, addMovie);
+router.put("/:id", authMiddleware, upDateMovie);
+router.delete("/:id", authMiddleware, deleteMovie);
 
 export default router;

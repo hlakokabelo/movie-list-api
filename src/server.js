@@ -26,7 +26,7 @@ app.use("/watchlist", watchListRoutes);
 
 
 
-app.get("/hello", (req, res) => {
+app.use("/hello", (req, res) => {
   res.json({ message: "hello world" });
 });
 
