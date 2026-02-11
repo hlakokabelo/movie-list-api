@@ -31,35 +31,15 @@
 
 ## 📋 Table of Contents
 
-1. [Introduction](#-introduction)
+1. [Tech Stack](#️-tech-stack)
 
-2. [Tech Stack](#-tech-stack)
+2. [Features](#️-features)
 
-3. [Features](#-features)
+3. [Quick Start](#-quick-start)
 
-4. [Quick Start](#-quick-start)
+4. [API Endpoints](#-api-endpoints)
 
-5. [API Endpoints](#-api-endpoints)
-
-6. [Database Schema](#-database-schema)
-
-7. [Deployment](#-deployment)
-
----
-
-## 🚀 Introduction
-
-In this comprehensive backend course, you'll learn how to build a **complete RESTful API** from scratch using **Node.js**, **Express.js**, and modern backend development practices. This video walks you through building:
-
-1. **User Authentication System** - Secure registration, login, and JWT-based authentication
-
-2. **Movie Management API** - Full CRUD operations for movie data
-
-3. **Watchlist Feature** - Personal watchlist with status tracking and ratings
-
-Perfect for developers looking to master backend development, learn API design, implement authentication, work with databases using Prisma ORM, and build production-ready backend applications.
-
-🎥 **Watch the full tutorial**: [YouTube](https://youtu.be/RZ6Rk_g2GLY)
+5. [Database Schema](#️-database-schema)
 
 ---
 
@@ -246,62 +226,3 @@ The API will be available at: [http://localhost:5001](http://localhost:5001)
 - `updatedAt` - Last update timestamp
 
 ---
-
-## ☁️ Deployment
-
-### Deploy on Railway
-
-1. Push your code to GitHub
-
-2. Go to [railway.app](https://railway.app)
-
-3. Create a new project and import your repository
-
-4. Add PostgreSQL service
-
-5. Set environment variables:
-   - `DATABASE_URL` (automatically provided by Railway)
-   - `JWT_SECRET` (generate a secure random string)
-   - `PORT` (Railway will set this automatically)
-
-6. Deploy your application
-
-Your API will be live on a custom Railway subdomain!
-
-### Alternative Deployment Options
-
-- [Render](https://render.com/) - Full-stack deployment with PostgreSQL
-
-- [Heroku](https://www.heroku.com/) - Platform-as-a-service deployment
-
-- [DigitalOcean App Platform](https://www.digitalocean.com/products/app-platform) - Simple app deployment
-
-- [AWS](https://aws.amazon.com/) - Enterprise-grade cloud hosting
-
----
-
-### Learn More with Pedro Technologies
-
-- 🌐 **Course Website**: [www.webdevultra.com](https://www.webdevultra.com)
-
-- 📺 **YouTube Channel**: [@pedrotechnologies](https://www.youtube.com/@pedrotechnologies)
-
-Follow along for more backend tutorials, full-stack development, and practical coding projects!
-
----
-
-## 🔗 Useful Links
-
-- [Node.js Documentation](https://nodejs.org/docs)
-
-- [Express.js Documentation](https://expressjs.com/)
-
-- [Prisma Documentation](https://www.prisma.io/docs)
-
-- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
-
-- [JWT.io](https://jwt.io/) - JWT token decoder and debugger
-
-- [Zod Documentation](https://zod.dev/)
-
-- [Railway Deployment Guide](https://docs.railway.app/)
