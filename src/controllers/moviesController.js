@@ -11,13 +11,13 @@ const getMovies = async (req, res) => {
 
   const { title, year, genre } = req.query;
 
-  if (title !== undefined) {
+  if (title !== undefined && title!=='') {
     movies = movies.filter((movie) => {
       if (movie.title.toLowerCase().includes(title.toLowerCase())) return movie;
     });
   }
 
-  if (year !== undefined) {
+  if (year !== undefined && year!=='') {
     if (isNaN(year))
       return res
         .status(401)
@@ -29,7 +29,7 @@ const getMovies = async (req, res) => {
     });
   }
 
-  if (genre !== undefined) {
+  if (genre !== undefined && genre!=='') {
     movies = movies.filter((movie) => {
       for (const mGenre of movie.genres) {
         console.log(mGenre);
