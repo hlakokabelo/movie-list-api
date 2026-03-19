@@ -79,7 +79,7 @@
             year: "number (optional) - Filter by release year",
             genre: "string (optional) - Filter by genre (case-insensitive, partial match)",
           },
-          example: `/api/movies?genre=action&year=2020`,
+          example: `/api/movies?genre=action&year=2008`,
           response: {
             moviesCount: "number",
             movies: "array of movie objects",
