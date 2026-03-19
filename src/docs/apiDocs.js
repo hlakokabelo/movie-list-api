@@ -9,7 +9,7 @@ import {
 export const generateApiDocs = (req, res) => {
   // Combine all endpoints into main API docs
 
-  const baseUrl = `${req.protocol}://${req.get("host")}`;
+  const baseUrl = `${req.protocol}://${req.get("host")}/api`;
 
   const apiDocs = {
     api: "Movie List API",
