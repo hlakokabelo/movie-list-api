@@ -13,22 +13,18 @@ import movieRoutes from "./routes/movieRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import watchListRoutes from './routes/watchListRoutes.js'
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
+import { generateApiDocs } from "./docs/apiDocs.js";
 
 //body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //API Routes
-app.use("/movies", movieRoutes);
-app.use("/auth", authRoutes);
-app.use("/watchlist", watchListRoutes);
+app.use("/api/movies", movieRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/watchlist", watchListRoutes);
 
-
-
-
-app.use("/hello", (req, res) => {
-  res.json({ message: "hello world" });
-});
+app.get("/api", generateApiDocs);
 
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

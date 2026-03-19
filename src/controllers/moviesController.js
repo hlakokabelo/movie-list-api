@@ -1,7 +1,5 @@
 import { prisma } from "../config/db.js";
 
-
-
 /**
  * Returns all movies
  * Can be queried by title,year & genre
@@ -11,25 +9,23 @@ const getMovies = async (req, res) => {
 
   const { title, year, genre } = req.query;
 
-  if (title !== undefined && title!=='') {
+  if (title !== undefined && title !== "") {
     movies = movies.filter((movie) => {
       if (movie.title.toLowerCase().includes(title.toLowerCase())) return movie;
     });
   }
 
-  if (year !== undefined && year!=='') {
+  if (year !== undefined && year !== "") {
     if (isNaN(year))
-      return res
-        .status(401)
-        .json({
-          error: `release year must be a number, ${year}, is not a number`,
-        });
+      return res.status(401).json({
+        error: `release year must be a number, ${year}, is not a number`,
+      });
     movies = movies.filter((movie) => {
       if (movie.releaseYear === parseInt(year)) return movie;
     });
   }
 
-  if (genre !== undefined && genre!=='') {
+  if (genre !== undefined && genre !== "") {
     movies = movies.filter((movie) => {
       for (const mGenre of movie.genres) {
         console.log(mGenre);
@@ -38,10 +34,10 @@ const getMovies = async (req, res) => {
     });
   }
 
-  res.json({
-    status: "success",
-    data: { moviesCount: movies.length, movies },
-  });
+  movies.forEach(movie=>{
+    movie.link ="/api/movies/"+movie.id
+  })
+  res.json({ moviesCount: movies.length, movies });
 };
 
 const getMovie = async (req, res) => {
@@ -54,7 +50,7 @@ const getMovie = async (req, res) => {
       .status(400)
       .json({ error: `movie with id ${movieId} was not found` });
   }
-  res.json({ status: "success", data: { movie } });
+  res.json({ movie });
 };
 
 const addMovie = async (req, res) => {
