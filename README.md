@@ -1,228 +1,49 @@
-# Movie list API
+# Movie List API
 
 <div align="center">
-
-<br />
-
-<br />
-
-<div>
-
 <img src="https://img.shields.io/badge/-Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
-
 <img src="https://img.shields.io/badge/-Express-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express" />
-
 <img src="https://img.shields.io/badge/-JWT-000000?style=for-the-badge&logo=jsonwebtoken&logoColor=white" alt="JWT" />
-
 <img src="https://img.shields.io/badge/-Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma" />
-
 <img src="https://img.shields.io/badge/-PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-
-<img src="https://img.shields.io/badge/-Zod-3E63DD?style=for-the-badge&logo=zod&logoColor=white" alt="Zod" />
-
 </div>
 
-<div align="center">
-</div>
+## 🚀 Live API
+**Base URL:** [`https://movie-list-api-z4dh.onrender.com/api`](https://movie-list-api-z4dh.onrender.com/api)
 
-<br />
+## 📋 Endpoints
 
-</div>
+### 🔐 Auth
+- `POST /api/auth/register` - Create account
+- `POST /api/auth/login` - Get JWT token
+- `POST /api/auth/logout` - Clear session
 
-## 📋 Table of Contents
+### 🎬 Movies
+- `GET /api/movies` - List all movies
+  - 🔍 **Query params:** `?title=inception&year=2010&genre=action`
+- `GET /api/movies/:id` - Get single movie
+- `POST /api/movies` - Add movie (auth)
+- `PUT /api/movies/:id` - Update movie (auth)
+- `DELETE /api/movies/:id` - Delete movie (auth)
 
-1. [Tech Stack](#️-tech-stack)
+### 📺 Watchlist (All auth)
+- `POST /api/watchlist` - Add movie to list
+- `PUT /api/watchlist/:id` - Update status/rating
+- `DELETE /api/watchlist/:id` - Remove from list
 
-2. [Features](#️-features)
-
-3. [Quick Start](#-quick-start)
-
-4. [API Endpoints](#-api-endpoints)
-
-5. [Database Schema](#️-database-schema)
-
----
-
-## ⚙️ Tech Stack
-
-- **Node.js** – JavaScript runtime for server-side development
-
-- **Express.js** – Fast, minimalist web framework for Node.js
-
-- **JWT (JSON Web Tokens)** – Secure authentication and authorization
-
-- **Prisma** – Next-generation ORM for database management
-
-- **PostgreSQL** – Powerful, open-source relational database
-
-- **Zod** – TypeScript-first schema validation library
-
-- **bcryptjs** – Password hashing for secure user authentication
-
-- **dotenv** – Environment variable management
-
----
-
-## ⚡️ Features
-
-### 🔐 Authentication System
-
-- 📝 **User Registration** - Secure user signup with email validation
-
-- 🔑 **User Login** - JWT-based authentication with token generation
-
-- 🚪 **User Logout** - Token invalidation and session management
-
-- 🔒 **Password Hashing** - Secure password storage using bcryptjs
-
-- 🛡️ **Protected Routes** - Middleware-based route protection
-
-### 🎬 Movie Management
-
-- 📋 **CRUD Operations** - Create, read, update, and delete movies
-
-- 🎯 **Movie Details** - Store title, overview, release year, genres, runtime, and poster URLs
-
-- 👤 **User Association** - Track which user created each movie
-
-- 🔍 **Query Support** - Filter and search movie data
-
-### 📺 Watchlist System
-
-- ➕ **Add to Watchlist** - Save movies to personal watchlist
-
-- 📊 **Status Tracking** - Track watch status (Planned, Watching, Completed, Dropped)
-
-- ⭐ **Rating System** - Rate movies with optional notes
-
-- 🗑️ **Remove Items** - Delete movies from watchlist
-
-- ✏️ **Update Items** - Modify watchlist item status and ratings
-
-### 🛠️ Additional Features
-
-- ✅ **Request Validation** - Zod schema validation for all endpoints
-
-- 🚨 **Error Handling** - Centralized error handling middleware
-
-- 🔐 **JWT Middleware** - Automatic token verification for protected routes
-
-- 🗄️ **Database Migrations** - Prisma migrations for schema management
-
-- 🌱 **Database Seeding** - Seed script for initial data
-
----
-
-## 👌 Quick Start
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (v18 or higher)
-
-- [PostgreSQL](https://www.postgresql.org/) (v14 or higher)
-
-- [Git](https://git-scm.com/)
-
-### Installation
-
-1. **Clone the repository**
+## 🛠️ Quick Setup
 
 ```bash
+# Clone & install
 git clone https://github.com/hlakokabelo/movie-list-api.git
 cd movie-list-api
-```
-
-2. **Install dependencies**
-
-```bash
 npm install
-```
 
-3. **Set up environment variables**
-
-Create a `.env` file in the root directory:
-
-```env
-DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
-JWT_SECRET="your-super-secret-jwt-key"
+# Environment (.env)
+DATABASE_URL="postgresql://..."
+JWT_SECRET="your-secret"
 PORT=5001
-```
 
-4. **Set up the database**
-
-```bash
-# Run Prisma migrations
+# Database & start
 npx prisma migrate dev
-
-# (Optional) Seed the database with sample data
-npm run seed-movies
-```
-
-5. **Start the development server**
-
-```bash
 npm run dev
-```
-
-The API will be available at: [http://localhost:5001](http://localhost:5001)
-
----
-
-## 🔌 API Endpoints
-
-### Authentication Routes
-
-- `POST /auth/register` - Register a new user
-- `POST /auth/login` - Login and receive JWT token
-- `POST /auth/logout` - Logout (invalidate token)
-
-### Movie Routes
-
-- `GET /movies` - Get all movies
-- `GET /movies?title=&year=&genre=` - Querie movies
-- `POST /movies` - Create a new movie
-- `PUT /movies/:id` - Update a movie
-- `DELETE /movies/:id` - Delete a movie
-
-### Watchlist Routes (Protected)
-
-- `POST /watchlist` - Add movie to watchlist
-- `PUT /watchlist/:id` - Update watchlist item
-- `DELETE /watchlist/:id` - Remove movie from watchlist
-
----
-
-## 🗄️ Database Schema
-
-### User Model
-
-- `id` - Unique identifier (UUID)
-- `name` - User's full name
-- `email` - Unique email address
-- `password` - Hashed password
-- `createdAt` - Account creation timestamp
-
-### Movie Model
-
-- `id` - Unique identifier (UUID)
-- `title` - Movie title
-- `overview` - Movie description
-- `releaseYear` - Year of release
-- `genres` - Array of genre strings
-- `runtime` - Movie duration in minutes
-- `posterUrl` - URL to movie poster image
-- `createdBy` - User ID of creator
-- `createdAt` - Creation timestamp
-
-### WatchlistItem Model
-
-- `id` - Unique identifier (UUID)
-- `userId` - Reference to User
-- `movieId` - Reference to Movie
-- `status` - Watch status (PLANNED, WATCHING, COMPLETED, DROPPED)
-- `rating` - Optional rating (1-10)
-- `notes` - Optional personal notes
-- `createdAt` - Creation timestamp
-- `updatedAt` - Last update timestamp
-
----
