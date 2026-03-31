@@ -34,10 +34,10 @@ const getMovies = async (req, res) => {
     });
   }
 
-  movies.forEach(movie=>{
-    movie.link ="/api/movies/"+movie.id
-  })
-  res.json({ moviesCount: movies.length, movies });
+  movies.forEach((movie) => {
+    movie.link = "/api/movies/" + movie.id;
+  });
+  res.json(movies);
 };
 
 const getMovie = async (req, res) => {
@@ -50,7 +50,7 @@ const getMovie = async (req, res) => {
       .status(400)
       .json({ error: `movie with id ${movieId} was not found` });
   }
-  res.json({ movie });
+  res.json(movie);
 };
 
 const addMovie = async (req, res) => {
@@ -70,7 +70,7 @@ const addMovie = async (req, res) => {
 
   // Build update data
 
-  res.status(201).json({ status: "success", data: { movie } });
+  res.status(201).json(movie);
 };
 
 const upDateMovie = async (req, res) => {
@@ -104,7 +104,7 @@ const upDateMovie = async (req, res) => {
     data: updateData,
   });
 
-  res.status(201).json({ status: "success", data: { updatedMovie } });
+  res.status(201).json( updatedMovie);
 };
 
 const deleteMovie = async (req, res) => {
